@@ -7,7 +7,7 @@ async function redirectRandomly(linksArr) {
 }
 
 async function fetchPortfolioLinks() {
-  const readmeUrl = 'https://raw.githubusercontent.com/emmabostian/developer-portfolios/master/README.md';
+  const readmeUrl = 'https://raw.githubusercontent.com/emmabostian/developer-portfolios/main/README.md';
 
   try {
     const response = await fetch(readmeUrl);
@@ -17,29 +17,29 @@ async function fetchPortfolioLinks() {
 
     const readmeText = await response.text();
 
-    return extractLinks(readmeText)
+    // Find the pos of '#AA' in the README bc all portfolio links come after
+    const aaIndex = readmeText.indexOf('#AA');
+    if (aaIndex === -1) {
+      console.log("No '#AA' section found.");
+      return [];
+    }
 
+    // Extract only the content after '#AA' 
+    const portfolioLinks = readmeText.slice(aaIndex);
+
+    const urlRegex = /\[.*?\]\((https?:\/\/[^\)]+)\)/g;
+
+    const urls = [];
+    let match;
+
+    while ((match = urlRegex.exec(portfolioLinks)) !== null) {
+      urls.push(match[1]);
+    }
+    return urls;
   } catch (error) {
     console.error('Error:', error);
     return [];
   }
-}
-
-// Find the pos of '#AA' in the README bc all portfolio links come after
-function extractLinks(text, sectionTitle = '## A') {
-  const sectionStartIndex = text.indexOf(sectionTitle);
-  
-  if (sectionStartIndex === -1) {
-    return [];
-  }
-
-  const section = text.slice(sectionStartIndex);
-
-  const urlPattern = /\[.*?\]\((https?:\/\/[^\)]+)\)/g;
-
-  const links = [...section.matchAll(urlPattern)].map(match => match[1]);
-
-  return links;
 }
 
 window.onload = async () => {

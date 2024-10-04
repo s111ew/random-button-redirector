@@ -2,6 +2,7 @@ import './style.css';
 
 const README_URL = 'https://raw.githubusercontent.com/emmabostian/developer-portfolios/master/README.md';
 const SECTION_TITLE = '## A'; // Portfolio links only appear after '## A'
+const REDIRECT_URL = 'https://github.com/emmabostian/developer-portfolios';
 
 const initialize = async () => {
   try {
@@ -11,6 +12,12 @@ const initialize = async () => {
     } else {
       console.warn('No portfolio links found.');
     }
+
+    // Redirect back to github repo if no valid link found after 5 seconds 
+    setTimeout(() => {
+      console.log(`Redirecting to: ${REDIRECT_URL}`);
+      window.location.href = REDIRECT_URL;
+    }, 5000);
   } catch (error) {
     console.error('Error during initialization:', error);
   }

@@ -85,7 +85,7 @@ const checkLinkStatus = async (url) => {
 
 const unsortArray = (array) => {
   const unsorted = [...array];
-  for (let i = unsortd.length - 1; i > 0; i--) {
+  for (let i = unsorted.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [unsorted[i], unsorted[j]] = [unsorted[j], unsorted[i]];
   }

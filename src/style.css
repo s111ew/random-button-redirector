@@ -1,4 +1,22 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
-  text-align: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+img {
+  width: 30px;
+  height: 23px;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
 }

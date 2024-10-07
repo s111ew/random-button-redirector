@@ -71,10 +71,9 @@ const redirectToRandomLink = async (linksArr) => {
       window.location.href = link;
       return;
     } else {
-      console.warn(`Invalid link: ${link}. Trying the next one.`);
+      console.warn(`Invalid link: ${link}. Trying the next one.`); //handle bad link?
     }
   }
-
   console.error('No valid portfolio links found.');
 };
 
@@ -107,9 +106,9 @@ const loadingAnimation = () => {
 const changeLoadingText = (element) => {
   if (element.textContent === "Redirecting...") {
     element.textContent = "Redirecting"
-  } else {
-    element.textContent += "."
+    return
   }
+    element.textContent += "."
 }
 
 window.addEventListener('load', () => {
